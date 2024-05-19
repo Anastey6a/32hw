@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Слайдер зображень</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .slider {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            overflow: hidden;
+        }
+        .slider img {
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+        .slider img.active {
+            display: block;
+        }
+        .slider button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .slider button.prev {
+            left: 10px;
+        }
+        .slider button.next {
+            right: 10px;
+        }
+        .slider button.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider">
+        <button class="prev hidden">&laquo; Prev</button>
+        <img src="https://www.aks.ua/item/view/616817/poverbank-baseus-bipow-pro-20000-mah-22-5w-blue-ppbd030003.html?utm_source=merchant&gad_source=1&gclid=CjwKCAjwo6GyBhBwEiwAzQTmcycqN1wGdnqLIOmCJnZRKnG1_n3s4oAk_WoX8_BiJ22IY93e32OYWhoCZfMQAvD_BwE" class="active" alt="Image 1">
+        <img src="https://rozetka.com.ua/baseus-ppbl000201/p427950752/" alt="Image 2">
+        <img src="https://hotline.ua/ua/mobile-universalnye-batarei/baseus-amblight-digital-display-quick-charge-65w-30000mah-black-pplg-a01/" alt="Image 3">
+        <img src="https://www.foxtrot.com.ua/ru/shop/portativnie_zariadnie_ustroistva_baseus.html" alt="Image 4">
+        <img src="https://epicentrk.ua/shop/mplc-paverbank-z-bezdrotovou-zaradkou-qi-15w-baseus-magnetic-mini-wireless-fast-charge-2v1-10000-mah-20-w-2-4-a-qc3-0-pd3-0-purpurovij-ppcx110105-1ee7ee6f-1f8d-61a2-8c82-4559d0242883.html" alt="Image 5">
+        <button class="next">&raquo; Next</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = document.querySelectorAll('.slider img');
+            const prevButton = document.querySelector('.slider .prev');
+            const nextButton = document.querySelector('.slider .next');
+            let currentIndex = 0;
+
+            function updateSlider() {
+                images.forEach((img, index) => {
+                    img.classList.toggle('active', index === currentIndex);
+                });
+                prevButton.classList.toggle('hidden', currentIndex === 0);
+                nextButton.classList.toggle('hidden', currentIndex === images.length - 1);
+            }
+
+            prevButton.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateSlider();
+                }
+            });
+
+            nextButton.addEventListener('click', () => {
+                if (currentIndex < images.length - 1) {
+                    currentIndex++;
+                    updateSlider();
+                }
+            });
+
+            updateSlider();
+        });
+    </script>
+</body>
+</html>
